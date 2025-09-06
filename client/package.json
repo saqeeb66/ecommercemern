@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "vite build",
     "dev": "vite",
     "build": "node_modules/.bin/vite build",
     "preview": "vite preview",
