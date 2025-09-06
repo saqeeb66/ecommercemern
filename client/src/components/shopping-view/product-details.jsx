@@ -1,4 +1,3 @@
-instead of this thing i need a page that will open after clicking on the product where 
 import { StarIcon } from "lucide-react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
