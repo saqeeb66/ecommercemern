@@ -113,7 +113,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
             alt={productDetails?.title}
             width={600}
             height={600}
-            className="aspect-square w-full object-cover"
+            className="aspect-square w-full object-contain"
           />
         </div>
         <div className="">
