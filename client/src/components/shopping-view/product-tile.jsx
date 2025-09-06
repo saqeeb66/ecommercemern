@@ -5,33 +5,27 @@ import { Badge } from "../ui/badge";
 import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function ShoppingProductTile({
-  product,
-  handleGetProductDetails,
-  handleAddtoCart,
-}) {
+function ShoppingProductTile({ product, handleGetProductDetails, handleAddtoCart }) {
   const { isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
 
   const onAddToCart = () => {
     if (!isAuthenticated) {
-      // Redirect to login and keep track of current page
       navigate("/auth/login", { state: { from: location } });
       return;
     }
-    // Call the original add to cart handler
     handleAddtoCart(product?._id, product?.totalStock);
   };
 
   return (
-    <Card className="w-full max-w-sm mx-auto">
+    <Card className="w-full">
       <div onClick={() => handleGetProductDetails(product?._id)}>
         <div className="relative">
           <img
             src={product?.image}
             alt={product?.title}
-            className="w-full h-[100px] object-contain rounded-t-lg"
+            className="w-full h-[200px] object-contain rounded-t-lg"
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
@@ -39,7 +33,7 @@ function ShoppingProductTile({
             </Badge>
           ) : product?.totalStock < 10 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-              {`Only ${product?.totalStock} items left`}
+              {`Only ${product?.totalStock} left`}
             </Badge>
           ) : product?.salePrice > 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
@@ -48,24 +42,28 @@ function ShoppingProductTile({
           ) : null}
         </div>
         <CardContent className="p-4">
-          <h2 className="text-xl font-bold mb-2">{product?.title}</h2>
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-[16px] text-muted-foreground">
+          <h2 className="text-lg font-bold mb-1">{product?.title}</h2>
+          <div className="flex justify-between items-center mb-1">
+            <span className="text-sm text-muted-foreground">
               {categoryOptionsMap[product?.category]}
             </span>
-            <span className="text-[16px] text-muted-foreground">
+            <span className="text-sm text-muted-foreground">
               {brandOptionsMap[product?.brand]}
             </span>
           </div>
-          <div className="flex justify-between items-center mb-2">
-            <span className={`${product?.salePrice > 0 ? "line-through" : ""} text-lg font-semibold text-primary`}>
+          <div className="flex justify-between items-center">
+            <span
+              className={`text-sm font-semibold text-primary ${
+                product?.salePrice > 0 ? "line-through" : ""
+              }`}
+            >
               INR {product?.price}
             </span>
-            {product?.salePrice > 0 ? (
-              <span className="text-lg font-semibold text-primary">
+            {product?.salePrice > 0 && (
+              <span className="text-sm font-semibold text-primary">
                 INR {product?.salePrice}
               </span>
-            ) : null}
+            )}
           </div>
         </CardContent>
       </div>
