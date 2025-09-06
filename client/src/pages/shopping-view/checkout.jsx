@@ -6,19 +6,17 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { createNewOrder } from "@/store/shop/order-slice";
 import { useToast } from "@/components/ui/use-toast";
-import { useNavigate } from "react-router-dom"; // ✅ for redirection
+import { useNavigate } from "react-router-dom";
 
 function ShoppingCheckout() {
   const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
   const [isPaymentStart, setIsPaymemntStart] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("cod"); // ✅ default set to COD
+  const [paymentMethod, setPaymentMethod] = useState("cod"); // Default COD
   const dispatch = useDispatch();
   const { toast } = useToast();
-  const navigate = useNavigate(); // ✅ for redirect
-
-  const DELIVERY_CHARGE = "FREE DELIVERY";
+  const navigate = useNavigate();
 
   const totalCartAmount =
     cartItems?.items?.length > 0
@@ -32,8 +30,6 @@ function ShoppingCheckout() {
           0
         )
       : 0;
-
-  const finalAmount = totalCartAmount + DELIVERY_CHARGE;
 
   function handleInitiatePayment() {
     if (!cartItems?.items?.length) {
@@ -51,7 +47,7 @@ function ShoppingCheckout() {
       return;
     }
 
-    // 🚫 Restrict PayPal and Razorpay
+    // Restrict PayPal and Razorpay
     if (paymentMethod === "paypal" || paymentMethod === "razorpay") {
       toast({
         title: "This service will come soon 🚀",
@@ -60,7 +56,7 @@ function ShoppingCheckout() {
       return;
     }
 
-    // ✅ Only COD allowed
+    // Only COD allowed
     const orderData = {
       userId: user?.id,
       cartId: cartItems?._id,
@@ -83,9 +79,9 @@ function ShoppingCheckout() {
         notes: currentSelectedAddress?.notes,
       },
       orderStatus: "pending",
-      paymentMethod: paymentMethod, // only cod now
+      paymentMethod: paymentMethod,
       paymentStatus: "pending",
-      totalAmount: finalAmount,
+      totalAmount: totalCartAmount, // No delivery charges
       orderDate: new Date(),
       orderUpdateDate: new Date(),
       paymentId: "",
@@ -131,13 +127,6 @@ function ShoppingCheckout() {
 
           {/* Price Summary */}
           <div className="mt-8 space-y-2">
-            <div className="flex justify-between">
-              <span className="font-bold">Subtotal</span>
-              <span className="font-bold">INR {totalCartAmount}</span>
-            </div>
-            {/* <div className="flex justify-between">
-              <span className="font-bold">Delivery Charges</span>
-            </div> */}
             <div className="flex justify-between border-t pt-2">
               <span className="font-bold">Total</span>
               <span className="font-bold">INR {totalCartAmount}</span>
@@ -189,12 +178,7 @@ function ShoppingCheckout() {
                 border: "none",
               }}
             >
-              {isPaymentStart && paymentMethod === "paypal"
-                ? "Processing Paypal Payment..."
-                : `Checkout with ${
-                    paymentMethod.charAt(0).toUpperCase() +
-                    paymentMethod.slice(1)
-                  }`}
+              Checkout with Cash on Delivery
             </Button>
           </div>
         </div>
