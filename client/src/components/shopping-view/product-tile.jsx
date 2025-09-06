@@ -31,7 +31,7 @@ function ShoppingProductTile({
           <img
             src={product?.image}
             alt={product?.title}
-            className="w-full h-[300px] object-fit rounded-t-lg"
+            className="w-full h-[100px] object-contain rounded-t-lg"
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
