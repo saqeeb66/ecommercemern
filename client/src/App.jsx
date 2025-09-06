@@ -40,7 +40,7 @@ function App() {
           <Route index element={<ShoppingHome />} />
           <Route path="shop/listing" element={<ShoppingListing />} />
           <Route path="shop/search" element={<SearchProducts />} />
-          <Route path="shop/product/:id" element={<ShoppingProductDetails />} />
+          <Route path="shop/product/:id" element={<ProductDetails />} />
 
         </Route>
 
