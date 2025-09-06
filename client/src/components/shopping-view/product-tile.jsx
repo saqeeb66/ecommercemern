@@ -73,13 +73,16 @@ function ShoppingProductTile({ product, handleGetProductDetails, handleAddtoCart
             Out Of Stock
           </Button>
         ) : (
-          <Button
-            onClick={onAddToCart}
-            className="w-full"
-            style={{ backgroundColor: "#FFC0CB", color: "#fff", border: "none" }}
-          >
-            Add to cart
-          </Button>
+       <Button
+  onClick={onAddToCart}
+  className="w-full transform transition duration-200 ease-in-out
+             hover:scale-105 hover:shadow-lg
+             active:scale-95"
+  style={{ backgroundColor: "#FFC0CB", color: "#fff", border: "none" }}
+>
+  Add to cart
+</Button>
+
         )}
       </CardFooter>
     </Card>
