@@ -10,7 +10,7 @@ export const getFeatureImages = createAsyncThunk(
   "/order/getFeatureImages",
   async () => {
     const response = await axios.get(
-      `http://localhost:5000/api/common/feature/get`
+      `https://ecommercemern-1-iiys.onrender.com/api/common/feature/get`
     );
     return response.data;
   }
@@ -21,7 +21,7 @@ export const addFeatureImage = createAsyncThunk(
   "/order/addFeatureImage",
   async (image) => {
     const response = await axios.post(
-      `http://localhost:5000/api/common/feature/add`,
+      `https://ecommercemern-1-iiys.onrender.com/api/common/feature/add`,
       { image }
     );
     return response.data;
@@ -34,7 +34,7 @@ export const removeFeatureImage = createAsyncThunk(
   async (imageId) => {
     // Adjust the URL and payload according to your backend API.
     const response = await axios.delete(
-      `http://localhost:5000/api/common/feature/remove/${imageId}`
+      `https://ecommercemern-1-iiys.onrender.com/api/common/feature/remove/${imageId}`
     );
     return response.data;
   }
