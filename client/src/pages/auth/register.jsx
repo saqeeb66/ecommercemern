@@ -25,7 +25,7 @@ function AuthRegister() {
         toast({
           title: data?.payload?.message,
         });
-        navigate("/auth/login");
+        navigate("/");
       } else {
         toast({
           title: data?.payload?.message,
