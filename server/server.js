@@ -29,7 +29,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: ["https://ecommercemern-1-iiys.onrender.com","https://www.imadsilk.com"]
+    origin: ["https://ecommercemern-1-iiys.onrender.com","https://www.imadsilk.com"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
